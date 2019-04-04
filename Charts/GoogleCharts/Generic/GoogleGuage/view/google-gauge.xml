@@ -1,0 +1,63 @@
+<ui layout="weblet">
+  <section id="main">
+    <weblet title="Google Gauge">
+      <body>
+        <block ref='bar' style='height:250px;' css='webletcontent forweblet chart' >
+        </block>
+        <uiscript>
+          <![CDATA[
+            $(function() {
+              var data = null;
+              var options = null;
+
+				      iviva.loadScript('https://www.gstatic.com/charts/loader.js', function() {
+              
+                // Load the Visualization API and the corechart package.
+                google.charts.load('current', {'packages':['corechart', 'gauge']});
+
+                // Set a callback to run when the Google Visualization API is loaded.
+                google.charts.setOnLoadCallback(drawChart);
+
+                uiscript.getJqField('bar').bind('webletsizechanged',function(){
+                  drawChart();
+                });
+              });
+                
+              // Callback that creates and populates a data table,
+              // instantiates the pie chart, passes in the data and
+              // draws it.
+              function drawChart() {
+                // Create the data table.
+                data = new google.visualization.arrayToDataTable([
+                  ['Device', 'Value'],
+                  ['CPU', 60],
+                  ['Memory', 85],
+                  ['Temperature', 55]
+                ]);
+
+                // Set chart options
+                options = {
+                  'title':'PC Monitor', 
+                  'width':'auto', 
+                  'height':'auto',
+                  'redFrom': 90,
+                  'redTo': 100,
+                  'yellowFrom': 65,
+                  'yellowTo': 90,
+                  'minorTicks': 5
+                };
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.Gauge(uiscript.getJqField('bar')[0]);
+
+                chart.draw(data, options);
+              }
+		        });
+          ]]>
+        </uiscript>
+      </body>
+      <options>
+      </options>
+    </weblet>
+  </section>
+</ui>
