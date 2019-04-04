@@ -8,15 +8,15 @@ The Asset Details weblet displays a list of Assets available in the system and a
 
 * **Weblet** - display _Assets_ in the system
 
-  ![Asset List Weblet](images/s1.png)
+  ![Asset List Weblet](images/s1.PNG)
 
 * **Dialog** - allows you to edit an Asset
   
-  ![Asset Edit Dialog](images/s2.png)
+  ![Asset Edit Dialog](images/s2.PNG)
 
 * **Quick Info** - display additional details about an Asset
 
-  ![Asset QuickInfo](images/s3.png)
+  ![Asset QuickInfo](images/s3.PNG)
 
 #### Backend Components
 
