@@ -1,0 +1,64 @@
+<ui layout='simple'>
+  <stylesheet src='https://fonts.googleapis.com/css?family=Montserrat:400,700' />
+  <section id='title'>
+    <html>
+      <![CDATA[
+  		<h3>Sidebar Title</h3>
+	  ]]>
+    </html>
+  </section>
+  <section id='main'>
+    <content>
+      <block style='margin: 10px'>
+		    <html>
+          <![CDATA[
+            <h3>Sidebar Body</h3>
+          ]]>
+        </html>
+      </block>
+      <sidebar>
+        <group>
+          <!-- Used to group items together within a sidebar 
+            Attributes:
+              1) collpased: Set to true to make the group initially collapsed. Set to false to keep it expanded
+              values: true | false
+              2) colorscheme: An optional colorscheme to apply to the group
+              values: 1-12
+              3) title: Title of the group
+          -->
+          <!-- The sidebargroup can contain within it any fields that need to be rendered as part of that sidebar group. Typically these would include <sidebarlink /> fields -->
+          <sidebargroup collapsed='true' title='Actions' colorscheme='1'>
+            <!-- Renders a link in a sidebar. The link can navigate to a different page or execute javascript or ui action block sequences 
+              Attributes:
+                1) app: The application holding the view that should be navigated to
+                values: text
+                2) view: The view to navigate to
+                values: text
+                3) popup : If true, the view is shown as a popup (this view better be a dialog :D)
+                values: true | false
+                4) icon: Any icon to be rendered in the link
+                values: delete | edit | info | add | list | right-arrow | left-arrow | search | pin | calendar | collapse | down-arrow | circle | play | close | close-2
+                5) 
+            -->
+            <!-- Inner Node
+              <Actions>: Contains any UI Action sequences to execute when the link is clicked.
+             -->
+            <sidebarlink app='Lucy' view='addapiroutes.partial' text='Create API Route' popup='true'>
+              <!-- Adding this would no longer navigate to the view once click-->
+              <!--
+              <Action>
+                <UIScript>
+                  <![CDATA[
+                    alert('clicked');
+                  ]]>
+                </UIScript>
+              </Action>
+			 -->
+            </sidebarlink>
+            <sidebarlink app='System' view='sendsms.partial' text='Send SMS' popup='true' />
+          </sidebargroup>
+        </group>
+      </sidebar>
+    </content>
+  </section>
+</ui>
