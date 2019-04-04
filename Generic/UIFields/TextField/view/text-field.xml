@@ -1,0 +1,51 @@
+<ui layout='weblet'>
+  <section id='main'>
+    <weblet title='Text Field'>
+      <body>
+        <block>
+          <html>
+            <![CDATA[
+              <style>
+                .title-spl {
+                  color: #459528;
+                  font-size: 18px;
+                  font-family: verdana;
+                }
+                
+                .spl {
+                  border-radius: 15px;
+                  background: #424242;
+                  box-shadow: 0 0 10px 1px #ccc;
+                }
+              </style>
+            ]]>
+          </html>
+          <fieldlist layout='horizontal'>
+            <text title='Field 1' tooltip='test'>
+              <!-- Display helper text beside the text field -->
+              <Footer>test</Footer>
+            </text>
+            <text title='Field 2'>
+              <Footer>test</Footer>
+            </text>
+            <text title='Field 3' />
+            <!-- Used to line-up fields horizontally. Internally, this wraps fields in a span tag (as opposed to FieldBlock elements that wrap fields in div tags). When alignment is specified, elements are wrapped in a div tag. Use this to center/right align elements in a horizontal fashion. -->
+            <!-- Attributes: 
+              1) align: right | left | center
+              2) title.css: Any css classes to be applied
+            -->
+            <fieldline title='Field 4' title.css='title-spl'>
+              <!-- 
+                Attributes:
+
+                1) css: Any css classes to be applied
+              -->
+              <text css='spl' />
+              <text />
+            </fieldline>
+          </fieldlist>
+        </block>
+      </body>
+    </weblet>
+  </section>
+</ui>

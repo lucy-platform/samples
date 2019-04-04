@@ -1,0 +1,20 @@
+<ui layout='simple'>
+  <section id='title'>
+    <html>
+      <![CDATA[
+		    QR Code
+	    ]]>
+    </html>
+  </section>
+  <section id='main'>
+    <block>
+      <html>
+        <![CDATA[
+          <h3>
+            <image style='width: 150px; height: 150px;' src='#{qrcode([f13ffac4-07bf-4752-8f91-163fe00d6b0f])}'/>
+          </h3>
+        ]]>
+      </html>
+    </block>
+  </section>
+</ui>
