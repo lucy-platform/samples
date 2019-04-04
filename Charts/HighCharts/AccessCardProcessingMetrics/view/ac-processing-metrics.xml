@@ -1,0 +1,132 @@
+<ui layout="weblet">
+  <section id="main">
+    <weblet title="Access Card Processing Metrics">
+      <body>
+        <!-- Placeholder for rendering charts -->
+        <block ref='bar' style='height:250px;'  css='webletcontent forweblet chart' >
+        </block>
+
+        <!-- Stores result from a datasource as json -->
+        <!-- Here We get the results from a lucy datasource with id 'AC_ProcessingTime'
+          and, we can access it in JS using -> uiscript.getFieldValue('ProcessingSource');
+        -->
+        <json source='AC_ProcessingTime' ref='ProcessingSource' />
+        <uiscript>
+          <![CDATA[               
+            var catdata = uiscript.getFieldValue('ProcessingSource');
+            var series = [];
+            avg =[];
+            var max=[];
+            var min=[];
+            var dt=[];
+                
+            // Formatting data in a way for it to be used
+            // by HighCharts library
+            for(var i=0;i<catdata.length;i++) {
+              avg.push(parseInt(catdata[i]['Avg']));
+              max.push(parseInt(catdata[i]['Max']));
+              min.push(parseInt(catdata[i]['Min']));
+              dt.push(catdata[i]['Date']);
+            }
+
+            $(function () {
+              Highcharts.theme =  ChartThemes.defaultTheme();
+
+              function drawChart() {
+                var thechart = uiscript.getJqField('bar').highcharts({
+                  chart: {
+                    type: 'line'
+                  },
+                  title: {
+                      text: 'Access Card Processing Times'
+                  },
+                  xAxis: {
+                    categories: dt,
+                    lineColor: '#000',
+                    lineWidth: 1,
+                    tickColor: '#000',
+                    labels: {
+                      rotation: 0,
+                      style: {
+                        fontSize: '8px',
+                        fontFamily: 'Verdana, sans-serif',
+                        color:'#808080'
+                      }
+                    }
+                  },
+                  yAxis: {
+                    title: {
+                        text: 'Process Time (Seconds)'
+                    },
+                    lineColor: '#000',
+                    lineWidth: 1,
+                    tickWidth: 1,
+                    plotLines: [{
+                      value: 0,
+                      width: 1,
+                      color: '#808080'
+                    }]
+                  },
+                  tooltip: {
+                    valueSuffix: '(Seconds)'
+                  },
+                  legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 2
+                  },
+                  plotOptions: {
+                    line: {
+                      dataLabels: {
+                        enabled: true
+                      },
+                      enableMouseTracking: true
+                    }
+                  },
+                  series: 
+                  [
+                    { 
+                      name: 'Average',
+                      data: avg,
+                      color: 'blue',
+                    }, 
+
+                    {
+                      name: 'Min',
+                      data: min  ,
+                      color: '#FF7F00',              
+                    },
+                    {
+                      name: 'Max',
+                      data: max,
+                      color: '#964B00',
+                    }
+                  ]
+                });
+              }
+              
+              // Draw the chart for the first time
+              drawChart();
+              
+              // Every time weblet is resized, draw it again
+              uiscript.getJqField('bar').bind('webletsizechanged',function(){
+                drawChart();
+              });
+            });
+          ]]>        
+        </uiscript>
+      </body>
+    </weblet>
+    <!-- Get the data from lucy data source 
+      serialize: Stores the result in the browser session
+      values: true | false
+      Can be accessed by,
+
+      1) __ServiceData__[<id>]
+      2) iviva.getAllData(<id>, [field_name]) - returns all data from the datasource id. If a field name is given, returns all the data only with that field name.
+      3) iviva.getData(<id>, [field_name]) - returns the first result from the datasource. If a field name is given, returns the first data only with that field name.
+    -->
+    <lucy id="AC_ProcessingTime" model="SandboxBackend" action="AccessCardProcessingTime" serialize="true" />
+  </section>
+</ui>
