@@ -1,6 +1,6 @@
 ## Date Time
 
-This repository contains UI code samples for working with date time UI fields.
+This sub directory contains UI code samples for working with date time UI fields.
 
 #### Sample
 
