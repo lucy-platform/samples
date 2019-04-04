@@ -1,0 +1,20 @@
+<ui layout='quickinfo'>
+  <section id='header'>
+    <html>
+      <![CDATA[
+        Asset - #{action.details.AssetID}
+      ]]>
+    </html>
+  </section>
+  <section id='main'>
+    <group title='Vendor Details'>
+      <fieldlist layout='vertical'>
+        <label title='ID' text='#{if action.details.VendorID? then action.details.VendorID else [N/A]}' />
+        <label title='Description' text='#{if action.details.VendorDescription? then action.details.VendorDescription else [N/A]}' />
+      </fieldlist>
+    </group>
+    <lucy id='details' model='SandboxBackend' action='AssetDetails'>
+      <key>#{param.key}</key>
+    </lucy>
+  </section>
+</ui>

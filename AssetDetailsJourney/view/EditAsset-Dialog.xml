@@ -1,0 +1,52 @@
+<ui layout='dialog'>
+  <section id='title'>
+    <html>
+      <![CDATA[
+        Edit Asset - #{action.details.AssetID}
+      ]]>
+    </html>
+  </section>
+  <section id='main'>
+    <group>
+      <fieldlist>
+        <!-- Note: If any field has an attribute like, "validate='true'"
+          and, if the "validate_fields" is set to true on an <action /> field
+          then those fields would checked if they have a valid value, before submitting.
+        -->
+        <label title='AssetID' text='#{action.details.AssetID}' />
+        <label title='Description' text='#{action.details.Description}' />
+        <list id='op_status_value' title='Operational Status' value='#{action.details.OperationalStatus}' simple_source='Operational,Non-Operational' />
+
+        <!-- Renders a button that can bind to a Service block defined on the form and will execute that service. Before that, it will first validate all fields before executing the service. By default, the action field will perform an HTTP submit on the entire page. You can set background='true' to make it execute in the background. When executing in the background, you need to either specify the background_fields property, or supply "ref" instead of an id. If you supply a "ref", it will automatically add to background_fields, all fields in the current scope. When submitting the page, all field values on the page will be posted and can be accessed using #{field.<field id>}.
+        -->
+        <!-- Attributes:
+          1) service: The id of the lucy service block to be executed. If not specified, it will look for a service block with the same id as the action field
+          values: text
+          2) css: Any css classes to be appled to the button. If nothing is provided, the 'normal_action' css class is applied
+          values: text
+          3) prompt: Any text to be shown to the user as a javascript prompt when the user clicks the button. Only if they confirm with 'OK' will the action proceed. Do not use this everywhere to ask the user if they are 'sure' they want to proceed. Use only in places where the button might do something the user may not expect or will result in a big change in the system
+          values: text
+          4) background: Set to true to make the action execute in the background without submitting the full page. When this is specified , the background_fields property must also be specified, unless the action field was declared with "ref" instead of an id. In that case, all fields in the current scope will be considered
+          values: true | false
+          5) background_fields: A comma separated list of field ids. Used when the background property is set to true. It indicates which fields on the page should be posted and validated as part of the background action. When a "ref" is declared for the action field (instead of an id) then this property does not need to be set, even if background=true (In this case, the current scope will be used to determine which fields to post.)
+          values: text
+          6) onclik: Any javascript to execute when the button is clicked. If the javscript has any errors in it then the action will not be executed. Use this to perform any custom javascript validation before the button is to be submitted. Return false to prevent the action from continuing to execute. Note that the javascript function cannot maky any asynchronous calls like ServiceDesk.executeService since it needs to return at once without waiting.
+          value: text
+          7) validate_fields: Set this to false to prevent field validation from being triggered when the action is about to execute
+          values: true | false
+        -->
+        <action id='update' text='Update' service='update' background='true' background_fields='op_status_value' />
+      </fieldlist>
+    </group>
+    <!-- This gets all the asset details for asset key -->
+    <!-- Use this approach, rather than passing all details to the dialog -->
+    <lucy id='details' model='SandboxBackend' action='AssetDetails'>
+      <key>#{param.key}</key>
+    </lucy>
+    <!-- This updates the asset once we click the update button -->
+    <lucy id='update' model='SandboxBackend' action='UpdateAsset'>
+      <key>#{param.key}</key>
+      <status>#{field.op_status_value}</status>
+    </lucy>
+  </section>
+</ui>

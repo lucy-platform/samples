@@ -1,0 +1,104 @@
+<ui layout='weblet'>
+  <section id='main'>
+    <weblet>
+      <header>
+      	<html>
+          <![CDATA[
+            <h3>Assets</h3>
+          ]]>
+        </html>  
+      </header>
+      <body>
+        <block>
+          <celllist id='assets_table' source='assets' include_count='true' max='10' nodata='No assets found' nomoredata='No more assets found' async='true'>
+            <parameter name='status' field='op_status' />
+            <parameter name='startdate' field='start_date' />
+            <block>
+              <cells>
+                <cell width='30px'>
+                  <![CDATA[
+                    <h3>#{row.AssetID}</h3>
+                  ]]>
+                </cell>
+                <cell width='30px'>
+                  <![CDATA[
+                    <h3>#{row.Description}</h3>
+                  ]]>
+                </cell>
+                <cell width='30px'>
+                  <![CDATA[
+                    <h3>#{row.OperationalStatus}</h3>
+                  ]]>
+                </cell>
+                <fieldcell width='30px'>
+                  <actionlist>
+                    <uiaction image='edit'>
+                      <action>
+                        <!-- Load a remote view into a dialog and show it. Optionally execute some ui actions if the dialog is successfully saved. -->
+                        <!-- Attributes: 
+                          1) view: The view to be loaded. In case of sandbox, the view is automatically transformed to 'System.sandbox-<view>'. If you would like show a view from a different app, then you need to something like the follwoing,
+                          <showdialog app='SomeApp' view='some-view' />
+                          values: text
+                          2) defaultparams: If set to true, then add the page's query string parameters to the parameters that are passed to the dialog. Default is false
+                          values: true | false
+                          3) autoclose: Set to true to close the dialog after it is successfully saved. Default is true. If set to false, it must be explicitly closed.
+                          values: true | false
+                        -->
+                        <!-- InnerNodes:
+                          1) <Parameter>	- List of parameters to be passed to the dialog
+                          2) <Success> - Inside the <Success> node, add ui action blocks to be executed if the dialog was saved successfully.
+                        -->
+                        <showdialog view='practice-asset-edit'>
+    					           <parameter name='key' value='#{row.AssetKey}'/>
+                          <success>
+                            <notify message='Updated!' />
+                            <uiscript>
+                              <![CDATA[
+                                iviva.getField('assets_table').reloadCurrent();
+                              ]]>
+                            </uiscript>
+                          </success>
+                        </showdialog>
+                      </action>
+                    </uiaction>
+                    <uiaction image='info' id='asset_#{row.AssetKey}'>
+                      <action>
+                        <!-- Load a remote view into a quick info bubble and show it. You can leave field/ref empty if the action is executed in the context of an element. -->
+                        <!-- Attributes: 
+                          1) view: The view to be loaded. In case of sandbox, the view is automatically transformed to 'System.sandbox-<view>'. If you would like show a view from a different app, then you need to something like the follwoing,
+                          <showquickinfo app='SomeApp' view='some-view' />
+                          values: text
+                          2) defaultparams: If set to true, then add the page's query string parameters to the parameters that are passed to the dialog. Default is false
+                          values: true | false
+                          3) field: The id of a field to show the quick info bubble near
+                          4) ref: The ref of a field to show the quick info bubble near.
+                        -->
+                        <!-- InnerNodes:
+                          <Parameter>	- List of parameters to be passed to the quick info bubble
+                        -->
+                        <showquickinfo view='practice-asset-info' field='asset_#{row.AssetKey}'>
+    					            <parameter name='key' value='#{row.AssetKey}'/>
+                        </showquickinfo>
+                      </action>
+                    </uiaction>
+                  </actionlist>
+                </fieldcell>
+              </cells>
+            </block>
+          </celllist>
+        </block>
+      </body>
+      <options>
+        <group title='Operational Status'>
+          <fieldlist layout='vertical'>
+            <list id='op_status' simple_source='Operational,Non-Operational' value='' />
+            <!-- `can_clear` - says if the field can be empty  -->
+            <date id='start_date' title='Start Date' can_clear='true' />
+            <date id='end_date' title='End Date' can_clear='true' />
+          </fieldlist>
+        </group>
+      </options>
+    </weblet>
+    <lucy id='assets' model='SandboxBackend' action='ListAssets' serialize='true' />
+  </section>
+</ui>
