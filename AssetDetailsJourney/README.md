@@ -18,6 +18,20 @@ The Asset Details weblet displays a list of Assets available in the system and a
 
   ![Asset QuickInfo](images/s3.PNG)
 
+#### Illustration
+
+* Editing an Asset
+
+  ![Asset Edit](images/s4.gif)
+
+* Filtering Assets by Operational Status
+
+  ![Filter by Op Status](images/s5.gif)
+
+* Filtering Assets by Installed Date
+
+  ![Filter by Installed Date](images/s6.gif)
+
 #### Backend Components
 
 * **SandboxBackend** - _Lucy model_ that provides data for the view to render with the following action sequences,
