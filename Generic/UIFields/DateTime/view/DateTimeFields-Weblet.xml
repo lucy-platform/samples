@@ -1,0 +1,17 @@
+<ui layout='weblet'>
+  <section id='main'>
+    <weblet title='Date Time Fields'>
+      <body>
+        <block>
+          <fieldlist>
+            <date title='Date' ref='a' />
+            <time title='Time' ref='b' />
+            <datetime title='Datetime' ref='x' />
+            <duration title='Duration' ref='y' />
+            <currency title='Currency' ref='z' />
+          </fieldlist>
+        </block>
+      </body>
+    </weblet>
+  </section>
+</ui>

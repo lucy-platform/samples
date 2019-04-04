@@ -1,0 +1,56 @@
+<ui layout='simple'>
+  <section id='title'>
+    <html>
+      <![CDATA[
+		    Expression Language
+	    ]]>
+    </html>
+  </section>
+  <section id='main'>
+    <block style='margin: 5px'>
+      <!-- Refer: http://docs.iviva.com/lucy/2.0/ice.html#available-variables-and-objects -->
+      <group title='Variables and Objects'>
+        <!-- Refer: http://docs.iviva.com/lucy/2.0/ice.html#auth -->
+        <group title='Auth'>
+          <html>
+            <![CDATA[
+     	        <p>auth.UserKey - #{auth.UserKey}</p>
+			        <p>auth.UserID - #{auth.UserID}</p>
+		          <p>auth.FullName - #{auth.FullName}</p>
+              <p>auth.FirstName - #{auth.Firstname}</p>
+              <p>auth.LastName - #{auth.LastName}</p>
+            ]]>
+          </html>
+        </group>
+        <!-- Refer: http://docs.iviva.com/lucy/2.0/ice.html#param -->
+        <group title='Param'>
+          <html>
+            <![CDATA[
+     	        <p>param.param1 - #{param.param1}</p>
+			        <p>param.param2 - #{param.param2}</p>
+            ]]>
+          </html>
+        </group>
+        <!-- 
+          Refer: http://docs.iviva.com/lucy/2.0/ice.html#transformers
+        -->
+        <group title='Transformers'>
+          <html>
+            <![CDATA[
+              <p>now - #{now}</p>
+              <p>duration - #{140|duration}</p>
+              <p>datediff - #{now|datediff(now)}</p>
+              <p>timediff - #{now|timediff(now)}</p>
+              <p>datetimeformat - #{now|datetimeformat}</p>
+              <p>dateformat - #{now|dateformat}</p>
+              <p>friendlydatetimeformat - #{now|friendlydatetimeformat}</p>
+              <p>friendlyhtmldatetimeformat - #{now|friendlyhtmldatetimeformat}</p>
+              <p>htmldatetimeformat - #{now|htmldatetimeformat}</p>
+		          <p>htmltimeformat - #{now|htmltimeformat}</p>
+            ]]>
+          </html>
+        </group>
+      </group>
+    </block>
+  </section>
+</ui>

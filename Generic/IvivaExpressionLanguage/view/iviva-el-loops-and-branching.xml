@@ -1,0 +1,70 @@
+<ui layout='simple'>
+  <section id='title'>
+    <html>
+      <![CDATA[
+        Loops & Conditions
+      ]]>
+    </html>
+  </section>
+  <section id='main'>
+    <block>
+      <!-- Refer: http://docs.iviva.com/lucy/2.0/ice.html#logic -->
+      
+      <html>
+        <![CDATA[
+          <!-- Note:
+            = & == -> both do equality checks
+            [9] | int -> transform str to int
+          -->
+          <p>
+            #{if ([9] | int = 9) then [equal] else [not equal]}
+          <p>
+          
+          <!-- Note:
+            comparing 9(int) with 9(str) is still equal
+            like javascript "==" comparison vs, "===" comparison
+          -->
+          <p>
+            #{if ([9] | int == [9]) then [equal] else [not equal]}
+          </p>
+          
+          <p>
+            #{if ([9] | int != 10) then [not equal] else [equal]}
+          </p>
+          
+          <p>
+            #{if ([a] | validint) then [valid int] else [not valid int]}
+          </p>
+
+          <p>
+            #{match
+              [9] == 10|str : [never equal]
+              [9] == [9] : [equal]
+              else [something else]
+            }
+          </p>
+
+          ${if auth.UserKey = 2}
+              <h3>Logged In</h3>
+          ${elseif auth.UserKey = 1}
+              <h3>Authorized</h3>4
+          ${else}
+            <h3>Unautorized</h3>
+          ${end}
+
+          <p>for x in concat([a,],[b])|split([,])
+            ${for x in concat([a,],[b])|split([,])}
+                <h3>Part - #{x}</h3>
+            ${end}
+          </p>
+
+          <p>for x in [a,b,c,d]|split([,])
+            ${for x in [a,b,c,d]|split([,])}
+                <h3>Part - #{x}</h3>
+            ${end}
+          </p>
+	      ]]>
+      </html>
+    </block>
+  </section>
+</ui>
