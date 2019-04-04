@@ -1,0 +1,59 @@
+<ui layout="weblet">
+  <section id="main">
+    <weblet title="Assets by Category">
+      <body>
+        <block ref='bar' style='height:250px;' css='webletcontent forweblet chart' >
+        </block>
+        <uiscript>
+          <![CDATA[               
+            $(function() {
+				      iviva.loadScript('https://www.gstatic.com/charts/loader.js', function() {
+
+                // Load the Visualization API and the corechart package.
+                google.charts.load('current', {'packages':['corechart']});
+
+                // Set a callback to run when the Google Visualization API is loaded.
+                google.charts.setOnLoadCallback(drawChart);
+
+                uiscript.getJqField('bar').bind('webletsizechanged',function(){
+                  drawChart();
+                });
+              });
+                
+              // Callback that creates and populates a data table,
+              // instantiates the pie chart, passes in the data and
+              // draws it.
+              function drawChart() {
+                var assetcount = __ServiceData__['assetcount'];
+                var assetData = [];
+
+                assetcount.forEach(function(asset) {
+                  assetData.push([asset.AssetCategoryID, xint(asset.AssetID)]);
+                });
+
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Category');
+                data.addColumn('number', 'Assets');
+                data.addRows(assetData);
+
+                // Set chart options
+                var options = {'title':'Assets by Category', 'width':'auto', 'height':'auto'};
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(uiscript.getJqField('bar')[0]);
+      
+                chart.draw(data, options);
+              }
+
+              uiscript.declareFunction('drawChart', drawChart);
+		        });
+          ]]>
+        </uiscript>
+      </body>
+      <options>
+      </options>
+    </weblet>
+    <lucy id='assetcount' model='SandboxBackend' action='AssetCountByCategory' serialize='true' />
+  </section>
+</ui>
