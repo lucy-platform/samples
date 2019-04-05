@@ -1,0 +1,66 @@
+<ui layout="simple">
+  <section id="title">
+    <pageheader id='Field Group' />
+  </section>
+  <section id="main">
+    <block style ='margin-left: 10px;'>
+      <!-- Used to group fields together with a single title. Can supply an optional subtitle that appears on the right side. Commonly the subtitle area is used to show an 'add' button to add an item to a list of items being shown inside the group. When a page's edit icon is clicked, each field group's colorscheme can be individually customized. (An id must be assigned to the field group for it's colorscheme to be customizable) -->
+      <group title='Group 1' id='group1'>
+        <!-- To handle the common use-case of showing an 'add' button. Use this and specify a UIAction block inside it. It will automatically add an 'add' icon and execute the UIAction blocks when clicked. -->
+        <addaction>
+          <uiscript>
+            <![CDATA[
+              alert('add');
+            ]]>
+          </uiscript>
+        </addaction>
+        <!-- Html content to show as the subtitle on the right side -->
+        <subtitle>
+          <![CDATA[
+            <a class='icon-info' onclick='alert("info")'></a>
+          ]]>
+        </subtitle>
+        <!-- instead of html content, render a list of fields on the right side -->
+        <subtitlefields>
+          <uiaction image='edit'>
+            <action>
+              <uiscript>
+                <![CDATA[
+                  alert('edit');
+                ]]>
+              </uiscript>
+            </action>
+          </uiaction>
+          <uiaction image='delete'>
+            <action>
+              <uiscript>
+                <![CDATA[
+                  alert('delete');
+                ]]>
+              </uiscript>
+            </action>
+          </uiaction>
+        </subtitlefields>
+        <fieldlist>
+          <html><![CDATA[Group 1 Field #{random(1,10)}]]></html>
+          <html><![CDATA[Group 1 Field #{random(1,10)}]]></html>
+          <html><![CDATA[Group 1 Field #{random(1,10)}]]></html>
+        </fieldlist>
+      </group>
+      <group title='Group 2' id='group2'>
+        <fieldlist>
+          <html><![CDATA[Group 2 Field #{random(1,10)}]]></html>
+          <html><![CDATA[Group 2 Field #{random(1,10)}]]></html>
+          <html><![CDATA[Group 2 Field #{random(1,10)}]]></html>
+        </fieldlist>
+      </group>
+      <group title='Group 3' id='group3'>
+        <fieldlist>
+          <html><![CDATA[Group 3 Field #{random(1,10)}]]></html>
+          <html><![CDATA[Group 3 Field #{random(1,10)}]]></html>
+          <html><![CDATA[Group 3 Field #{random(1,10)}]]></html>
+        </fieldlist>
+      </group>
+    </block>
+  </section>
+</ui>

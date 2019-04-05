@@ -4,11 +4,11 @@
       <body>
         <block>
           <fieldlist>
-            <date title='Date' ref='a' />
-            <time title='Time' ref='b' />
-            <datetime title='Datetime' ref='x' />
-            <duration title='Duration' ref='y' />
-            <currency title='Currency' ref='z' />
+            <date title='Date' id='a' />
+            <time title='Time' id='b' />
+            <datetime title='Datetime' id='x' />
+            <duration title='Duration' id='y' />
+            <currency title='Currency' id='z' />
           </fieldlist>
         </block>
       </body>
