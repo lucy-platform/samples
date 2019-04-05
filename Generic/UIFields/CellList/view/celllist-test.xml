@@ -1,0 +1,62 @@
+<ui layout='weblet'>
+  <section id='main'>
+    <weblet title='CellList Field'>
+      <header>
+        <html>
+          <![CDATA[
+			<style>
+   			</style>
+   		  ]]>
+        </html>
+      </header>
+      <options>
+        <group title='Filters'>
+          <fieldlist layout='vertical'>
+            <list title='By Method' ref='filter_method' simple_source='GET,POST,PUT,PATCH,DELETE,OPTION,UPDATE,HEAD,UNKNOWN' />
+          </fieldlist>
+        </group>
+      </options>
+      <body>
+        <block>
+          <celllist css='forweblet' source='routes' max='10' nodata='No routes available' nomoredata='No more routes found' ref='routelist' include_count='true' columns='2' expandable='true' expandedcellheight='120px' cellheight='72px'>
+            <parameter name='q' ref='filter_method' />
+            <sortattribute attribute='Action' order='desc' />
+            <sortattribute attribute='Method' order='desc' />
+            <sortattribute attribute='Route' order='desc' />
+            <!--
+		      	NOTE: Soon to be de-scoped
+            <celllistheader>
+              <cells>
+                <cell width='50px'>
+                  Column 1
+                </cell>
+                <cell width='30px'>
+                  Column 1
+                </cell>
+                <cell width='30px'>
+                  Column 2
+                </cell>
+              </cells>
+            </celllistheader>-->
+            <block css='#{if (row.Method = [GET]) then [green] else []}'>
+              <cells>
+                <cell>
+                  <![CDATA[
+                    <h3>#{row.Route}</h3>
+                    <br/>
+                    <h3>#{row.Action or [No Description Available]}</h3>
+                    <br/>
+                    <h3>#{row.Method}</h3>
+					<br/>
+				  ]]>
+                </cell>
+              </cells>
+            </block>
+          </celllist>
+        </block>
+      </body>
+    </weblet>
+  </section>
+  <lucy id='routes' model='SandboxBackend' action='AllApiRoutes'>
+  </lucy>
+</ui>
