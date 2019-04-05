@@ -1,0 +1,34 @@
+<ui layout='simple'>
+  <section id='title'>
+    <html>
+      <![CDATA[
+        Group Editor
+      ]]>
+    </html>
+  </section>
+  <section id='main'>
+    <block>
+      <groupeditor service='update' id='assetdetails' update_fields='opstatus' submit='false'>
+        <Static title='Asset Details'>
+          <fieldlist>
+            <label title='Asset ID' text='#{action.details.AssetID}' />
+            <label title='Operational Status' text='#{action.details.OperationalStatus}' />
+          </fieldlist>
+        </Static>
+        <Edit title='Edit Asset Details'>
+          <fieldlist>
+            <text id='assetid' title='Asset ID' text='#{action.details.AssetID}' readonly='true' />
+            <list id='opstatus' title='Operational Status' simple_source='Operational,Non-Operational' value='#{action.details.OperationalStatus}' />
+          </fieldlist>
+        </Edit>
+      </groupeditor>
+    </block>
+    <lucy id='details' model='SandboxBackend' action='AssetDetails'>
+      <key>2</key>
+    </lucy>
+    <lucy id='update' model='SandboxBackend' action='UpdateAsset'>
+      <key>2</key>
+      <status>#{field.opstatus}</status>
+    </lucy>
+  </section>
+</ui>
